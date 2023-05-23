@@ -1,0 +1,19 @@
+{% extends 'base.html' %}  
+{% load crispy_forms_tags %}
+{% load static %}
+
+  
+{% block content %}  
+   
+    <form method="post" onsubmit="if(!confirm('Thats great! You have successfully registered')){return false;}">
+
+            <h3> Create an Account</h3>
+            {% csrf_token %}
+            {{ form | crispy }}<br>
+
+        <button class="btn btn-primary">Submit</button>
+    <hr>
+
+ <a href="{% url 'signin' %}">Login</a>
+    </form>
+    {% endblock %}
