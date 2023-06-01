@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     app:
-      image: 1234si/pythonapp:2
+      image: 1234si/pythonapp:3
       ports:
           - 8002:8002
     nginx:
