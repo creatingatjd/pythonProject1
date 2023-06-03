@@ -1,7 +1,9 @@
 version: "3.8"
 services:
     app:
-      image: 1234si/pythonapp:${tag}
+    environment:
+      - TAG='0'
+      image: 1234si/pythonapp:${TAG}
       ports:
           - 8002:8002
     nginx:
