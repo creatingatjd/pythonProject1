@@ -1,18 +1,7 @@
-variables:
-  ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-    why: pr
-  ${{ elseif eq(variables['Build.Reason'], 'Manual' ) }}:
-    why: manual
-  ${{ elseif eq(variables['Build.Reason'], 'IndividualCI' ) }}:
-    why: indivci 
-  ${{ else }}:
-    why: other
-
-name: $(TeamProject)_$(SourceBranchName)_$(why)_$(Date:yyyyMMdd)$(Rev:.r)
-
 pool:
-  vmImage: 'ubuntu-latest'
-#Your build pipeline references an undefined variable named ‘public_ip’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+  vmImage: Azure Pipelines
+variables:
+  public_ip: '"[\''34.226.121.50\']"'
 
 - task: Bash@3
   inputs:
