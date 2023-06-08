@@ -13,6 +13,7 @@ name: $(TeamProject)_$(SourceBranchName)_$(why)_$(Date:yyyyMMdd)$(Rev:.r)
 pool:
   vmImage: 'ubuntu-latest'
 #Your build pipeline references an undefined variable named ‘public_ip’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
