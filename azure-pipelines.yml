@@ -1,7 +1,7 @@
 pool:
   vmImage: Azure Pipelines
 variables:
-  public_ip: '"[\''34.226.121.50\']"'
+  public_ip: '"[\'34.226.121.50\']"'
 
 - task: Bash@3
   inputs:
