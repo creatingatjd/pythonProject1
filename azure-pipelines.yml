@@ -1,5 +1,5 @@
 pool:
-  vmImage: Azure Pipelines
+  name: Azure Pipelines
 variables:
   public_ip: '"[\'34.226.121.50\']"'
 
