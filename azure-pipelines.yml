@@ -10,14 +10,10 @@ variables:
       # Write your commands here
       
       sed -i "s/^ALLOWED_HOSTS = \['.*'\]/ALLOWED_HOSTS = $(public_ip)/" settings.py
-    workingDirectory: 'webpro'
+    workingDirectory: '$(Build.SourcesDirectory)/webpro'
 - task: CmdLine@2
   inputs:
-    script: |
-      echo Write your commands here
-      
-      pip install -r requirements.txt
-    workingDirectory: 'webpro'
+    script: 'pip install -r requirements.txt'
 - task: PythonScript@0
   inputs:
     scriptSource: 'filePath'
