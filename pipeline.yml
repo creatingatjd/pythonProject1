@@ -1,0 +1,41 @@
+pool:
+  name: Azure Pipelines
+variables:
+ - name: public_ip
+   value: "[\'44.212.71.114\']"
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      sed -i "s/^ALLOWED_HOSTS = \['.*'\]/ALLOWED_HOSTS = $(public_ip)/" settings.py
+    workingDirectory: '$(Build.SourcesDirectory)/webpro'
+- task: CmdLine@2
+  inputs:
+    script: 'pip install -r requirements.txt'
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: 'manage.py'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'mydockerhub'
+    repository: '1234si/pythonapp'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    tags: '$(Build.BuildNumber)'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+      docker-compose.yml
+      nginx.conf
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
