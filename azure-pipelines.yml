@@ -1,7 +1,8 @@
 pool:
   name: Azure Pipelines
 variables:
-  public_ip: '"[\'44.212.71.114\']"'
+ - name: public_ip
+   value: "['44.212.71.114']"
 
 - task: Bash@3
   inputs:
