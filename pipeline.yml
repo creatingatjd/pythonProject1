@@ -1,5 +1,6 @@
+name: $(Rev:r)
 pool:
-  name: Azure Pipelines
+  vmImage: ubuntu-latest
 variables:
  - name: public_ip
    value: "[\'44.212.71.114\']"
