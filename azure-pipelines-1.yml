@@ -7,8 +7,7 @@ trigger:
 - none
 variables:
   public_ip: "[\'44.212.71.114\']"
-options:
-  Build number format: $(Rev:r)
+
 pool:
   vmImage: ubuntu-latest
 - task: Bash@3
@@ -36,7 +35,7 @@ pool:
     repository: '1234si/pythonapp'
     command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
-    tags: '$(Build.BuildNumber)'
+    tags: '$(Build.BuildId)'
 - task: CopyFiles@2
   displayName: Copy Files
   inputs:
