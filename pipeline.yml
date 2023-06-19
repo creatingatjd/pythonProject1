@@ -3,7 +3,7 @@ pool:
   vmImage: ubuntu-latest
 variables:
  - name: public_ip
-   value: "[\'44.212.71.114\']"
+   value: "[\'44.211.220.221\']"
 
 steps:
 - task: Bash@3
