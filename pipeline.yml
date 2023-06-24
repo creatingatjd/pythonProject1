@@ -12,12 +12,14 @@ stages:
     - job: build
       steps:
        - task: Bash@3
+         displayName: 'Replace IP'      
          inputs:
           targetType: 'inline'
        - script: |
           sed -i "s/^ALLOWED_HOSTS = \['.*'\]/ALLOWED_HOSTS = $(public_ip)/" settings.py
           workingDirectory: '$(Build.SourcesDirectory)/webpro'
        - task: CmdLine@2
+         displayName: 'install python dependencies'
          inputs:
            script: 'pip install -r requirements.txt'
        - task: PythonScript@0
