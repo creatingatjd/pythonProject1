@@ -14,19 +14,21 @@ stages:
        - task: Bash@3
          displayName: 'Replace IP'      
          inputs:
-          targetType: 'inline'
-       - script: |
-          sed -i "s/^ALLOWED_HOSTS = \['.*'\]/ALLOWED_HOSTS = $(public_ip)/" settings.py
-          workingDirectory: '$(Build.SourcesDirectory)/webpro'
+           targetType: 'inline'
+           script: 'sed -i "s/^ALLOWED_HOSTS = \[''.*''\]/ALLOWED_HOSTS = $(public_ip)/" settings.py'
+           workingDirectory: '$(Build.SourcesDirectory)/webpro'
+          
        - task: CmdLine@2
          displayName: 'install python dependencies'
          inputs:
            script: 'pip install -r requirements.txt'
        - task: PythonScript@0
+         displayName: 'code compilation'
          inputs:
           scriptSource: 'filePath'
           scriptPath: 'manage.py'
        - task: Docker@2
+         displayName: 'build and push docker'
          inputs:
            containerRegistry: 'mydockerhub'
            repository: '1234si/pythonapp'
@@ -34,6 +36,7 @@ stages:
            Dockerfile: 'Dockerfile'
            tags: '$(Build.BuildNumber)'
        - task: CopyFiles@2
+         displayName: 'Copy deployment files'
          inputs:
            SourceFolder: '$(Build.SourcesDirectory)'
            Contents: |
@@ -41,6 +44,7 @@ stages:
              nginx.conf
            TargetFolder: '$(Build.ArtifactStagingDirectory)'
        - task: PublishBuildArtifacts@1
+         displayName: 'publish build artifacts'
          inputs:
            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
            ArtifactName: 'drop'
