@@ -19,7 +19,7 @@ stages:
           workingDirectory: '$(Build.SourcesDirectory)/webpro'
        - task: CmdLine@2
          inputs:
-       - script: 'pip install -r requirements.txt'
+           script: 'pip install -r requirements.txt'
        - task: PythonScript@0
          inputs:
           scriptSource: 'filePath'
