@@ -63,11 +63,11 @@ stages:
          inputs:
              containerregistrytype: 'Container Registry'
              dockerRegistryEndpoint: mydockerhub
-             dockerComposeFile: $(System.DefaultWorkingDirectory)/_python-yamlpipeline/drop/docker-compose.yml
+             dockerComposeFile: '$(System.DefaultWorkingDirectory)/_python-yamlpipeline/drop/docker-compose.yml'
              dockerComposeFileArgs: 'TAG=$(Build.BuildNumber)'
              projectName: pythonapp
              qualifyImageNames: false
              dockerComposeCommand: up
              arguments: '--detach'
-             workingDirectory: $(System.DefaultWorkingDirectory)
+             workingDirectory: '$(System.DefaultWorkingDirectory)'
 
