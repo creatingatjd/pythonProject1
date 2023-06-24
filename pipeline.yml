@@ -53,16 +53,21 @@ stages:
   jobs:
     - job: deploy
       steps:
+       - task: DownloadBuildArtifacts@1
+         inputs:
+            buildType: 'current'
+            downloadType: 'specific'
+            downloadPath: '$(System.ArtifactsDirectory)'
        - task: DockerCompose@0
          displayName: 'Run a Docker Compose command'
          inputs:
              containerregistrytype: 'Container Registry'
              dockerRegistryEndpoint: mydockerhub
-             dockerComposeFile: '$(System.DefaultWorkingDirectory)/python-yamlpipeline/drop/docker-compose.yml'
+             dockerComposeFile: '$(System.ArtifactsDirectory)/docker-compose.yml'
              dockerComposeFileArgs: 'TAG=$(Build.BuildNumber)'
              projectName: pythonapp
              qualifyImageNames: false
              dockerComposeCommand: up
              arguments: '--detach'
-             workingDirectory: '$(System.DefaultWorkingDirectory)/python-yamlpipeline/drop'
+             workingDirectory: '$(System.ArtifactsDirectory'
 
