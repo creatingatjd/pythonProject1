@@ -63,7 +63,7 @@ stages:
          inputs:
              containerregistrytype: 'Container Registry'
              dockerRegistryEndpoint: mydockerhub
-             dockerComposeFile: '$(System.ArtifactsDirectory)/_python-yamlpipeline/drop/docker-compose.yml'
+             dockerComposeFile: '$(System.ArtifactsDirectory)/drop/docker-compose.yml'
              dockerComposeFileArgs: 'TAG=$(Build.BuildNumber)'
              projectName: pythonapp
              qualifyImageNames: false
