@@ -76,12 +76,13 @@ stages:
   jobs:
    - deployment: deploy_to_QA
      environment: QA
+
    - job: deploy
      steps:
        - task: ManualValidation@0
          inputs:
-           notifyUsers: sireesha1885@gmail.com
-           instructions: 'continue?'
+             notifyUsers: sireesha1885@gmail.com
+             instructions: 'continue?'
        - task: DownloadBuildArtifacts@1
          inputs:
             buildType: 'current'
