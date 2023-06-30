@@ -51,7 +51,7 @@ stages:
            publishLocation: 'Container'
 - stage: deploy_development
   jobs:
-    - deployment: deploy
+    - deployment: deploy_to_Development
       environment: Development
     - job: deploy
       steps:
@@ -74,7 +74,7 @@ stages:
              workingDirectory: '$(System.ArtifactsDirectory)'
 - stage: deploy_QA
   jobs:
-   - deployment: deploy
+   - deployment: deploy_to_QA
      environment: QA
    - job: deploy
      steps:
