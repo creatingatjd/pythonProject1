@@ -49,8 +49,11 @@ stages:
            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
            ArtifactName: 'drop'
            publishLocation: 'Container'
-- stage: deploy_app
+- stage: deploy_development
   jobs:
+    - deployment: deploy
+      displayName: deploy
+      environment: Development
     - job: deploy
       steps:
        - task: DownloadBuildArtifacts@1
@@ -70,4 +73,27 @@ stages:
              dockerComposeCommand: up
              arguments: '--detach'
              workingDirectory: '$(System.ArtifactsDirectory)'
-
+- stage: deploy_QA
+  jobs:
+   - deployment: deploy
+     displayName: deploy
+     environment: QA
+   - job: deploy
+     steps:
+       - task: DownloadBuildArtifacts@1
+         inputs:
+            buildType: 'current'
+            downloadType: 'specific'
+            downloadPath: '$(System.ArtifactsDirectory)'
+       - task: DockerCompose@0
+         displayName: 'Run a Docker Compose command'
+         inputs:
+             containerregistrytype: 'Container Registry'
+             dockerRegistryEndpoint: mydockerhub
+             dockerComposeFile: '$(System.ArtifactsDirectory)/drop/docker-compose.yml'
+             dockerComposeFileArgs: 'TAG=$(Build.BuildNumber)'
+             projectName: pythonapp
+             qualifyImageNames: false
+             dockerComposeCommand: up
+             arguments: '--detach'
+             workingDirectory: '$(System.ArtifactsDirectory)'
