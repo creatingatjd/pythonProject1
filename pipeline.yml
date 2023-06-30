@@ -52,7 +52,6 @@ stages:
 - stage: deploy_development
   jobs:
     - deployment: deploy
-      displayName: deploy
       environment: Development
     - job: deploy
       steps:
@@ -76,7 +75,6 @@ stages:
 - stage: deploy_QA
   jobs:
    - deployment: deploy
-     displayName: deploy
      environment: QA
    - job: deploy
      steps:
