@@ -3,7 +3,7 @@ FROM python:3.11-slim-buster
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONUNBUFFERED=1
-WORKDIR webpro
+WORKDIR webproject
 ADD . .
 RUN pip install -r requirements.txt
 #COPY requirements.txt requirements.txt
